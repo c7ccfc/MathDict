@@ -1,0 +1,58 @@
+body {
+    background-color: #afafaf;
+    margin: 0px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.body {
+    background-color: #ffffff;
+    width: 65vw;
+    height: calc(100vh - 100px);
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+}
+
+.search_box {
+    width: 55vw;
+    position: relative;
+    transform: translate(-50%);
+    left: 50%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.search_box input {
+    padding: 5px;
+    width: 45vw;
+    border: none;
+    outline: none;
+    border-bottom: 3px solid #afafaf;
+    font-size: 30px;
+}
+
+.result_container {
+    width: 55vw;
+    position: relative;
+    transform: translate(-50%);
+    left: 50%;
+    border-color: black;
+}
+
+.word {
+    font-size: 36px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.synonym {
+    font-size: 18px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,42 @@
+body {
+    background-color: #afafaf;
+    margin: 0px;
+}
+
+.body {
+    background-color: #ffffff;
+    width: 65vw;
+    height: calc(100vh - 100px);
+    position: absolute;
+    transform: translate(-50%);
+    left: 50%;
+}
+
+.search_box {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.search_box input {
+    padding: 5px;
+    width: 45vw;
+    border: none;
+    outline: none;
+    border-bottom: 3px solid #afafaf;
+    font-size: 30px;
+}
+
+.navbar_container {
+    color: black;
+}
+.navbar_logo {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 70px;
+    
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none;
+    color: white;
+}
