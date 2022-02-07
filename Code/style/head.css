@@ -1,15 +1,25 @@
 .navbar {
-    background-color: rgb(51, 51, 51);
-    width: 100vw;
+    color: black;
+    font-size: 20px;
     height: 100px;
     text-align: center;
     vertical-align: middle;
 }
 
-.navbar_logo {
-    font-size: 80px;
+.navbar a {
+    margin-left: 30px;
 }
 
-.navbar_logo a {
-    text-decoration: none;
+.header {
+    background-color: rgb(244, 231, 177);
+}
+
+.logo h1 {
+    padding-top: 5px;
+    font-size: 12.3px;
+    color: rgb(75, 75, 75);
+}
+
+.logo {
+    padding-top: 12px;
 }
