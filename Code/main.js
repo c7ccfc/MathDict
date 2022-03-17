@@ -14,8 +14,8 @@ app.get('/', (req, res) => {
     res.end(page);
 });
 
-app.get('/search/:lang/:id', (req, res) => {
-    let page = templateSearch.getPage(req.params.lang, req.params.id);
+app.get('/search/:lang/:word', (req, res) => {
+    let page = templateSearch.getPage(req.params.lang, req.params.word);
     res.writeHead(200);
     res.end(page);
 });

@@ -4,14 +4,19 @@
     height: 100px;
     text-align: center;
     vertical-align: middle;
+    background-color: rgb(213, 213, 213);
 }
 
-.navbar a {
+.navbar .logo{
     margin-left: 30px;
 }
 
+.navbar .nav-item{
+    margin-right: 30px;
+}
+
 .header {
-    background-color: rgb(244, 231, 177);
+    background-color: rgb(213, 213, 213);
 }
 
 .logo h1 {

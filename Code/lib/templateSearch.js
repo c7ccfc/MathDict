@@ -43,8 +43,8 @@ module.exports = {
 
 //header - menu bar, logo, about us
 const header = () => {
-    let css = fs.readFileSync('./style/head.css').toString();
-    let js = fs.readFileSync('./style/head.js').toString();
+    let css = fs.readFileSync('./style/header.css').toString();
+    let js = fs.readFileSync('./style/header.js').toString();
     let logo = "";
     return `
         <style>${css}</style>
@@ -61,22 +61,21 @@ const header = () => {
 }
 
 //body - search bar, result
-const body = (lang, id) => {
+const body = (lang, word) => {
     let css = fs.readFileSync('./style/bodySearch.css').toString();
     let js = fs.readFileSync('./style/bodySearch.js').toString();
 
+    //can deleted after separate searchbar file
     const langs = JSON.parse(fs.readFileSync('./data/language.json'));
-    var option = ``;
+    var option = `<option value='' hidden>Language</option>`;
     for(let i = 0; i < Object.keys(langs).length; i++) {
-        if(Object.keys(langs)[i] === lang) {
-            option += `<option value='${Object.keys(langs)[i]}' selected>${Object.values(langs)[i]}</option>`;
-        } else {
-            option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`;
-        }
+        option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`;
     }
 
-    var dataA = con.query(`Select * from en WHERE id=${'"'+id+'"'}`)[0];
-    var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+id+'"'}`)[0];
+    
+
+    var dataA = con.query(`Select * from en WHERE id=${'"'+word+'"'}`)[0];
+    var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+word+'"'}`)[0];
     var synonym = (dataA.synonym === null && dataB.synonym === null) ? `` : `
         <div class='synonym'>
             ${dataA.synonym}
