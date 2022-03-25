@@ -8,7 +8,7 @@ var con = new mysql({
 });
 
 module.exports = {
-    getPage: (lang, id) => {
+    getPage: (lang, word) => {
         return `
             <!DOCTYPE html>
             <html lang="en">
@@ -34,7 +34,7 @@ module.exports = {
             </head>
             <body>
                 ${header()}
-                ${body(lang, id)}
+                ${body(lang, word)}
             </body>
             </html>
         `;
@@ -72,29 +72,58 @@ const body = (lang, word) => {
         option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`;
     }
 
-    
+    var result = ``;
+    var wordA = con.query(`Select id from en WHERE word=${'"'+word+'"'}`)[0];
+    var wordB = con.query(`Select id from ${lang} WHERE word=${'"'+word+'"'}`)[0];
+    console.log(wordA);
+    console.log(wordB);
 
-    var dataA = con.query(`Select * from en WHERE id=${'"'+word+'"'}`)[0];
-    var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+word+'"'}`)[0];
-    var synonym = (dataA.synonym === null && dataB.synonym === null) ? `` : `
-        <div class='synonym'>
-            ${dataA.synonym}
-            ${dataB.synonym}
-        </div>   
-    `; 
-    var example = (dataA.example === null && dataB.example === null) ? `` : `
-        <div class='example'>
-            ${dataA.example}
-            <div class='lineHorizontal'></div>
-            ${dataB.example}
-        </div>   
-    `; 
-    var reference = (dataA.reference === null && dataB.reference === null) ? `` : `
-        <div class='reference'>
-            ${dataA.reference}
-            ${dataB.reference}
-        </div>   
-    `; 
+    if(wordB === undefined && wordA === undefined){
+        result += `
+            <h3>Word Not Found</h3>
+        `;
+    }else{
+        if(wordB === undefined) wordId = wordA.id;
+        else wordId = wordB.id
+        var dataA = con.query(`Select * from en WHERE id=${'"'+wordId+'"'}`)[0];
+        var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+wordId+'"'}`)[0];
+        var synonym = (dataA.synonym === null && dataB.synonym === null) ? `` : `
+            <div class='synonym'>
+                ${dataA.synonym}
+                ${dataB.synonym}
+            </div>   
+        `; 
+        var example = (dataA.example === null && dataB.example === null) ? `` : `
+            <div class='example'>
+                ${dataA.example}
+                <div class='lineHorizontal'></div>
+                ${dataB.example}
+            </div>   
+        `; 
+        var reference = (dataA.reference === null && dataB.reference === null) ? `` : `
+            <div class='reference'>
+                ${dataA.reference}
+                ${dataB.reference}
+            </div>   
+        `;
+
+        result += `
+            <div class='word'>
+                ${dataA.word}
+                <br>
+                ${dataB.word}
+            </div>
+            ${synonym}
+            <div class='description'>
+                <p>${dataA.description}</p>
+                <p>${dataB.description}</p>
+            </div>
+            ${example}
+            ${reference}
+            <div class='info'>
+            </div>
+        `;
+    }
 
     return `
         <style>${css}</style>
@@ -112,20 +141,7 @@ const body = (lang, word) => {
                 <button id="search_btn">Search</button>
             </div>
             <div class='result_container'>
-                <div class='word'>
-                    ${dataA.word}
-                    <br>
-                    ${dataB.word}
-                </div>
-                ${synonym}
-                <div class='description'>
-                    <p>${dataA.description}</p>
-                    <p>${dataB.description}</p>
-                </div>
-                ${example}
-                ${reference}
-                <div class='info'>
-                </div>
+                ${result}
             </div>
         </section>
         <script>${js}</script>
