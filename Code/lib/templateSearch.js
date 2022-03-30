@@ -7,6 +7,8 @@ var con = new mysql({
     database: "imd"
 });
 
+const templateSearchBox = require('./templateSearchBox');
+
 module.exports = {
     getPage: (lang, word) => {
         return `
@@ -60,23 +62,18 @@ const header = () => {
     `;
 }
 
+
 //body - search bar, result
 const body = (lang, word) => {
     let css = fs.readFileSync('./style/bodySearch.css').toString();
     let js = fs.readFileSync('./style/bodySearch.js').toString();
 
-    //can deleted after separate searchbar file
-    const langs = JSON.parse(fs.readFileSync('./data/language.json'));
-    var option = `<option value='' hidden>Language</option>`;
-    for(let i = 0; i < Object.keys(langs).length; i++) {
-        option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`;
-    }
+    //search box
+    var search = templateSearchBox.getPage();
 
     var result = ``;
     var wordA = con.query(`Select id from en WHERE word=${'"'+word+'"'}`)[0];
     var wordB = con.query(`Select id from ${lang} WHERE word=${'"'+word+'"'}`)[0];
-    console.log(wordA);
-    console.log(wordB);
 
     if(wordB === undefined && wordA === undefined){
         result += `
@@ -128,18 +125,7 @@ const body = (lang, word) => {
     return `
         <style>${css}</style>
         <section class='body'>
-            <div class='search_box'>
-                <label for='search_lang'></label>
-                <select id='search_lang'>
-                    ${option}
-                </select>
-                <input
-                    type='text'
-                    placeholder='Type the word here...'
-                    id='search_word'
-                />
-                <button id="search_btn">Search</button>
-            </div>
+            ${search}
             <div class='result_container'>
                 ${result}
             </div>
