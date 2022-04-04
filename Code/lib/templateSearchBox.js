@@ -1,8 +1,8 @@
 const fs = require('fs');
 module.exports = {
     getPage: () => {
-        let css = fs.readFileSync('./style/bodyIndex.css').toString();
-        let js = fs.readFileSync('./style/bodyIndex.js').toString();
+        let css = fs.readFileSync('./style/SearchBox.css').toString();
+        let js = fs.readFileSync('./style/SearchBox.js').toString();
 
         //language selection options
         const langs = JSON.parse(fs.readFileSync('./data/language.json'));
