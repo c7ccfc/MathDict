@@ -67,6 +67,7 @@ const body = (lang, word) => {
         if(wordB === undefined) wordId = wordA.id;
         else wordId = wordB.id
         var dataA = con.query(`Select * from en WHERE id=${'"'+wordId+'"'}`)[0];
+        if(lang === 'en') wordId = 'null';
         var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+wordId+'"'}`)[0];
         var synonym = (dataA.synonym === null && dataB.synonym === null) ? `` : `
             <div class='synonym'>
@@ -89,19 +90,21 @@ const body = (lang, word) => {
         `;
 
         result += `
-            <div class='word'>
-                ${dataA.word}
-                <br>
-                ${dataB.word}
-            </div>
-            ${synonym}
-            <div class='description'>
-                <p>${dataA.description}</p>
-                <p>${dataB.description}</p>
-            </div>
-            ${example}
-            ${reference}
-            <div class='info'>
+            <div class='col-md-7 col-11 mx-auto'>
+                <div class='word'>
+                    ${dataA.word}
+                    <br>
+                    ${dataB.word}
+                </div>
+                ${synonym}
+                <div class='description'>
+                    <p>${dataA.description}</p>
+                    <p>${dataB.description}</p>
+                </div>
+                ${example}
+                ${reference}
+                <div class='info'>
+                </div>
             </div>
         `;
     }
@@ -110,9 +113,7 @@ const body = (lang, word) => {
         <style>${css}</style>
         <section class='body'>
             ${search}
-            <div class='result_container'>
-                ${result}
-            </div>
+            ${result}
         </section>
         <script>${js}</script>
     `;

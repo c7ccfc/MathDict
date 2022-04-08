@@ -9,7 +9,7 @@ module.exports = {
             <div class="header container-fluid">
             <div class='col-xl-7 col-lg-9 col-md-11 mx-auto'>
             <nav class="navbar navbar-expand-md navbar-light bg-transparent">
-                <a class="logo navbar-brand" href="#">
+                <a class="logo navbar-brand" href="#"6>
                     <div><img src="/img/logo.png" width="232" height="32" alt=""></div>
                     <h1>World Mathematics Dictionary - MathDict</h1>
                 </a>

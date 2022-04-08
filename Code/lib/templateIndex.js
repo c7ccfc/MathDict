@@ -47,10 +47,20 @@ module.exports = {
 //header - menu bar, logo, about us
 const header = templateHeader.getPage();
 
+
 const body = () => {
     var search = templateSearchBox.getPage();
+
+    var intro = `
+        <div class='col-md-7 col-11 mx-auto'>
+            <H3>What is MathDict?</H3>
+            <p>MathDict is a non-profit project to help ESL (English as a Second Language) students in the United States.</p>
+        </div>
+    `;
+
     return `
         ${search}
+        ${intro}
     `;
 }
 

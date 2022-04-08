@@ -4,6 +4,7 @@
 
 .search_box {
     margin-top: 70px;
+    margin-bottom: 70px;
     text-align: center;
 }
 
@@ -52,8 +53,9 @@
     display: flex;
 }
 .search_lower i {
+    margin-top: 7px;
     margin-left: 15px;
-    margin-right: 15px;
+    margin-right: 10px;
 }
 
 @media only screen and (max-width: 768px) {
