@@ -53,8 +53,9 @@ const body = (lang, word) => {
     let js = fs.readFileSync('./style/bodySearch.js').toString();
 
     //search box
-    var search = templateSearchBox.getPage();
+    var search = templateSearchBox.getPage(lang);
 
+    //get data
     var result = ``;
     var wordA = con.query(`Select id from en WHERE word=${'"'+word+'"'}`)[0];
     var wordB = con.query(`Select id from ${lang} WHERE word=${'"'+word+'"'}`)[0];
@@ -69,38 +70,60 @@ const body = (lang, word) => {
         var dataA = con.query(`Select * from en WHERE id=${'"'+wordId+'"'}`)[0];
         if(lang === 'en') wordId = 'null';
         var dataB = con.query(`Select * from ${lang} WHERE id=${'"'+wordId+'"'}`)[0];
+
+        //word
+        var word = `
+        <div class='word'>
+            <span class='A'>${dataA.word}</span>
+            <br>
+            <span class='B'>${dataB.word}</span>
+        </div>
+        `;
+
+        //definition
+        var definition = `
+            <div class='description'>
+                <div class='divider'>
+                    <span class='title'>Definition</span>
+                </div>
+                <p>${dataA.description}</p>
+                <p>${dataB.description}</p>
+            </div>
+        `;
+
+        //synonym
         var synonym = (dataA.synonym === null && dataB.synonym === null) ? `` : `
             <div class='synonym'>
                 ${dataA.synonym}
                 ${dataB.synonym}
             </div>   
         `; 
+
+        //example
         var example = (dataA.example === null && dataB.example === null) ? `` : `
             <div class='example'>
+                <hr class="divider">
                 ${dataA.example}
                 <div class='lineHorizontal'></div>
                 ${dataB.example}
             </div>   
         `; 
+
+        //reference
         var reference = (dataA.reference === null && dataB.reference === null) ? `` : `
             <div class='reference'>
+                <hr class="divider">
                 ${dataA.reference}
                 ${dataB.reference}
             </div>   
         `;
-
+        
+        //result
         result += `
             <div class='col-md-7 col-11 mx-auto'>
-                <div class='word'>
-                    ${dataA.word}
-                    <br>
-                    ${dataB.word}
-                </div>
+                ${word}
                 ${synonym}
-                <div class='description'>
-                    <p>${dataA.description}</p>
-                    <p>${dataB.description}</p>
-                </div>
+                ${definition}
                 ${example}
                 ${reference}
                 <div class='info'>

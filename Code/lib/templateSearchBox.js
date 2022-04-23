@@ -1,6 +1,6 @@
 const fs = require('fs');
 module.exports = {
-    getPage: () => {
+    getPage: (lang) => {
         let css = fs.readFileSync('./style/SearchBox.css').toString();
         let js = fs.readFileSync('./style/SearchBox.js').toString();
 
@@ -8,7 +8,11 @@ module.exports = {
         const langs = JSON.parse(fs.readFileSync('./data/language.json'));
         var option = `<option value='' hidden>Language</option>`;
         for(let i = 0; i < Object.keys(langs).length; i++) {
-            option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`;
+            if(lang === Object.keys(langs)[i]){ //maintaining searched lang
+                option += `<option value='${Object.keys(langs)[i]}' selected>${Object.values(langs)[i]}</option>`;
+            } else {
+                option += `<option value='${Object.keys(langs)[i]}'>${Object.values(langs)[i]}</option>`
+            }
         }
 
         return `

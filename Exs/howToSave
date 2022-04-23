@@ -1,3 +1,5 @@
 git add .
 git commit -m "[version]"
 git push origin master
+add link to logo
+search -> search url
