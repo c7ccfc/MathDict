@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const templateIndex = require('./lib/templateIndex')
 const templateSearch = require('./lib/templateSearch');
@@ -27,6 +27,11 @@ app.get('/about', (req, res) => {
 //login
 
 //create
+app.get('/create/:id', (req, res) => {
+    let page = templateCreate.getPage(req.params.id);
+    res.writeHead(200);
+    res.end(page);
+});
 
 //images
 app.get('/img/:name', function(req, res) {
