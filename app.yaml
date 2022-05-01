@@ -1,1 +1,7 @@
 runtime: nodejs16
+
+env_variables:
+  SEARCH_USERNAME: "reader"
+  SEARCH_PASSWORD: "reader"
+  SEARCH_DATABASE_NAME: "search"
+  SEARCH_CONNECTION_NAME: "mathdict:us-east4:mathdict"
