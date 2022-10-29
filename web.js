@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const port = 8001;
+const port = process.env.PORT || 8001;
 
 const templateIndex = require('./lib/templateIndex')
 const templateSearch = require('./lib/templateSearch');
