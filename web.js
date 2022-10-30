@@ -2,7 +2,7 @@ const http = require('http');
 const express = require('express');
 const fs = require('fs');
 const app = express();
-const port = 8002;
+const port = 8001;
 
 const templateIndex = require('./lib/templateIndex')
 const templateSearch = require('./lib/templateSearch');
@@ -35,7 +35,7 @@ app.get('/create/:id', (req, res) => {
 
 //images
 app.get('/img/:name', function(req, res) {
-    fs.readFile(`/home/hosting_users/mathdict/apps/mathdict_mdtest/image/${req.params.name}`, function(err, data) {
+    fs.readFile(`/home/hosting_users/mathdict/apps/mathdict_mathdict/image/${req.params.name}`, function(err, data) {
         res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(data);
     });
