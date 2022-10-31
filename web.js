@@ -35,7 +35,7 @@ app.get('/create/:id', (req, res) => {
 
 //images
 app.get('/img/:name', function(req, res) {
-    fs.readFile(`/home/hosting_users/mathdict/apps/mathdict_mathdict/image/${req.params.name}`, function(err, data) {
+    fs.readFile(`image/${req.params.name}`, function(err, data) {
         res.writeHead(200, {'Content-Type': 'text/html'});
     res.end(data);
     });
